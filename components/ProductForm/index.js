@@ -5,12 +5,11 @@ import useSWR from "swr";
 export default function ProductForm() {
   const { mutate } = useSWR("/api/products");
 
-  async function handleSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const productData = Object.fromEntries(formData);
-
     const response = await fetch("/api/products", {
       method: "POST",
       headers: {
@@ -29,7 +28,7 @@ export default function ProductForm() {
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm onSubmit={onSubmit}>
       <StyledHeading>Add a new Fish</StyledHeading>
       <StyledLabel htmlFor="name">
         Name:
