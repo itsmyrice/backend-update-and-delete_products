@@ -20,18 +20,19 @@ export default function Product() {
   if (!data) {
     return;
   }
-  async function handleDeleteProduct() {
+  
+  async function handleDeleteProduct(id) {
     const response = await fetch(`/api/products/${id}`, {
       method: "DELETE",
-    })
+    });
 
-    if(response.ok) {
-    response.status(200).json({ status: `Joke ${id} successfully deleted.` });
+    if (response.ok) {
+    await response.json();
     router.push("/")
     }
 
     if (!response.ok) {
-      console.error(response.status);
+      console.error(response.status(404))
       return;
     }
   }
